@@ -1,3 +1,6 @@
+/* eslint-disable no-console */
+
+//module2-tasks
 function getRandomIntFromRange(fromNum, toNum) {
   if (typeof fromNum !== 'number' || typeof toNum !== 'number') {
     console.error(new Error('Переданы значения, не являющиеся числами!'));
@@ -13,3 +16,6 @@ function getRandomIntFromRange(fromNum, toNum) {
 function hasLegalLength(string, maxLegalLength) {
   return string.length < maxLegalLength + 1;
 }
+
+
+
