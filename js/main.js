@@ -17,3 +17,5 @@ function hasLegalLength(string, maxLegalLength) {
   return string.length < maxLegalLength + 1;
 }
 
+
+
