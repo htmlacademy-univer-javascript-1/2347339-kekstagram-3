@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-console */
 import {getPhoto} from './data.js';
 import {createIdGenerator, getRandomIntFromRange} from './utils.js';

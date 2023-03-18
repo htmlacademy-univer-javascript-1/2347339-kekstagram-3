@@ -19,4 +19,4 @@ const createIdGenerator = (stardId = 0) => {
   return () => curId++;
 };
 
-export {getRandomIntFromRange, getRandomArrElem, createIdGenerator};
+export {getRandomIntFromRange, getRandomArrElem, hasLegalLength, createIdGenerator};
