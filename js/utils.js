@@ -1,9 +1,9 @@
 const getRandomIntFromRange = (fromNum, toNum) => {
   if (typeof fromNum !== 'number' || typeof toNum !== 'number') {
-    console.error(new Error('Переданы значения, не являющиеся числами!'));
+    throw 'Переданы значения, не являющиеся числами!';
   }
   if (fromNum > toNum) {
-    console.error(new Error('Начальное значение диапазона больше конечного!'));
+    throw 'Началое значение интервала больше конечного!';
   }
   fromNum = Math.ceil(fromNum);
   toNum = Math.floor(toNum);
