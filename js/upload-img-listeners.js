@@ -13,19 +13,9 @@ const IMG_EXTENSIONS = [
   'ico',
 ];
 const imgRp = new RegExp(`\\.(${IMG_EXTENSIONS.join('|')})*$`);   // rename to Element
-const uploadFileInput = document.querySelector('#upload-file');
-const imgEditor = document.querySelector('.img-upload__overlay');
+const uploadFileInputElem = document.querySelector('#upload-file');
+const imgEditorElem = document.querySelector('.img-upload__overlay');
 const imgEditorCloseElem = document.querySelector('#upload-cancel');
-
-const checkImgExtension = () => {
-  uploadFileInput.onchange = () => {
-    if (!imgRp.test(uploadFileInput.value)) {
-      alert('Невозможно загрузить файл, т.к. это не картинка');
-    } else {
-      openImgEditor();
-    }
-  };
-};
 
 const onEscKeydown = (evt) => {
   if (isEscKey(evt)) {
@@ -33,25 +23,31 @@ const onEscKeydown = (evt) => {
   }
 };
 
-function openImgEditor() {
-  imgEditor.classList.remove('hidden');
-  document.body.classList.add('modal-open');
-  uploadFileInput.setAttribute('disabled', '');
-  addImgEditorClose();
-}
-
-function addImgEditorClose() {
-  imgEditorCloseElem.addEventListener('click', closeImgEditor);
-  document.addEventListener('keydown', onEscKeydown);
-}
+const onImgEditorCrossClick = closeImgEditor;
 
 function closeImgEditor() {
-  imgEditor.classList.add('hidden');
+  imgEditorElem.classList.add('hidden');
   document.body.removeAttribute('class');
-  uploadFileInput.removeAttribute('disabled');
+  uploadFileInputElem.removeAttribute('disabled');
+  uploadFileInputElem.value = '';
+
   document.removeEventListener('keydown', onEscKeydown);
   imgEditorCloseElem.removeEventListener('click', closeImgEditor);
 }
 
-export {checkImgExtension};
+function openImgEditor() {
+  imgEditorElem.classList.remove('hidden');
+  document.body.classList.add('modal-open');
+  uploadFileInputElem.setAttribute('disabled', '');
 
+  imgEditorCloseElem.addEventListener('click', onImgEditorCrossClick);
+  document.addEventListener('keydown', onEscKeydown);
+}
+
+uploadFileInputElem.onchange = () => {
+  if (!imgRp.test(uploadFileInputElem.value)) {
+    alert('Невозможно загрузить файл, т.к. это не картинка');
+  } else {
+    openImgEditor();
+  }
+};
