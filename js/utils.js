@@ -19,4 +19,7 @@ const createIdGenerator = (stardId = 0) => {
   return () => curId++;
 };
 
-export {getRandomIntFromRange, getRandomArrElem, hasLegalLength, createIdGenerator};
+const isEscKey = (evt) => evt.key === 'Escape';
+const isEnterKey = (evt) => evt.key === 'Enter';
+
+export {getRandomIntFromRange, getRandomArrElem, hasLegalLength, createIdGenerator, isEscKey, isEnterKey};
