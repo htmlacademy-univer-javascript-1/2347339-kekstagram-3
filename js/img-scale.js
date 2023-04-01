@@ -1,30 +1,34 @@
 const incrImgScaleElem = document.querySelector('.scale__control--bigger');
 const redImgScaleElem = document.querySelector('.scale__control--smaller');
 const imgScaleElem = document.querySelector('.scale__control--value');
-const MAX_SCALE = 100, MIN_SCALE = 0, SCALE_STEP = 25;
+const imgPreviewElem = document.querySelector('.img-upload__preview');
+const MAX_SCALE = 100, MIN_SCALE = 25, SCALE_STEP = 25;
 
-const onIncrImgElemClick = () => {
-  const scaleValue = parseInt(imgScaleElem.value, 10);
-  if (scaleValue < MAX_SCALE) {
-    imgScaleElem.value = `${scaleValue + SCALE_STEP}%`;
+const getScaleChanger = (op) => () => {
+  let scaleValue = parseInt(imgScaleElem.value, 10);
+  const isLegalToChange = op === -1 ? scaleValue > MIN_SCALE : scaleValue < MAX_SCALE;
+  if (isLegalToChange) {
+    scaleValue += SCALE_STEP * op;
+    imgScaleElem.value = `${scaleValue}%`;
+    imgPreviewElem.style.scale = scaleValue / 100;
   }
 };
 
-const onRedImgElemClick = () => {
-  const scaleValue = parseInt(imgScaleElem.value, 10);
-  if (scaleValue > MIN_SCALE) {
-    imgScaleElem.value = `${scaleValue - SCALE_STEP}%`;
-  }
+const cb = {
+  'onScaleIncreaseClick': getScaleChanger(1),
+  'onScaleReduceClick': getScaleChanger(-1)
 };
 
 const addImgScaleListeners = () => {
-  incrImgScaleElem.addEventListener('click', onIncrImgElemClick);
-  redImgScaleElem.addEventListener('click', onRedImgElemClick);
+  incrImgScaleElem.addEventListener('click', cb.onScaleIncreaseClick);
+  redImgScaleElem.addEventListener('click', cb.onScaleReduceClick);
 };
 
 const removeImgScaleListeners = () => {
-  incrImgScaleElem.removeEventListener('click', onIncrImgElemClick);
-  redImgScaleElem.removeEventListener('click', onRedImgElemClick);
+  incrImgScaleElem.removeEventListener('click', cb.onScaleIncreaseClick);
+  redImgScaleElem.removeEventListener('click', cb.onScaleReduceClick);
+  imgPreviewElem.style.scale = 1;
+  imgScaleElem.value = '100%';
 };
 
 export {addImgScaleListeners, removeImgScaleListeners};
