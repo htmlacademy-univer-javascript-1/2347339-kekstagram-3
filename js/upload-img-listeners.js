@@ -1,6 +1,7 @@
 /* eslint-disable no-alert */
 
 import { isEscKey } from './utils.js';
+import { addImgScaleListeners, removeImgScaleListeners } from './img-scale.js';
 
 const IMG_EXTENSIONS = [
   'jpg',
@@ -12,7 +13,7 @@ const IMG_EXTENSIONS = [
   'webp',
   'ico',
 ];
-const imgRp = new RegExp(`\\.(${IMG_EXTENSIONS.join('|')})*$`);   // rename to Element
+const imgRp = new RegExp(`\\.(${IMG_EXTENSIONS.join('|')})*$`);
 const uploadFileInputElem = document.querySelector('#upload-file');
 const imgEditorElem = document.querySelector('.img-upload__overlay');
 const imgEditorCloseElem = document.querySelector('#upload-cancel');
@@ -33,6 +34,7 @@ function closeImgEditor() {
 
   document.removeEventListener('keydown', onEscKeydown);
   imgEditorCloseElem.removeEventListener('click', closeImgEditor);
+  removeImgScaleListeners();
 }
 
 function openImgEditor() {
@@ -42,6 +44,7 @@ function openImgEditor() {
 
   imgEditorCloseElem.addEventListener('click', onImgEditorCrossClick);
   document.addEventListener('keydown', onEscKeydown);
+  addImgScaleListeners();
 }
 
 uploadFileInputElem.onchange = () => {
