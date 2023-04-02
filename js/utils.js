@@ -19,7 +19,9 @@ const createIdGenerator = (stardId = 0) => {
   return () => curId++;
 };
 
+const getLastArrElem = (arr) => arr ? arr[arr.length - 1] : null;
+
 const isEscKey = (evt) => evt.key === 'Escape';
 const isEnterKey = (evt) => evt.key === 'Enter';
 
-export {getRandomIntFromRange, getRandomArrElem, hasLegalLength, createIdGenerator, isEscKey, isEnterKey};
+export {getRandomIntFromRange, getRandomArrElem, hasLegalLength, createIdGenerator, isEscKey, isEnterKey, getLastArrElem};
