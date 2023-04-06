@@ -116,10 +116,11 @@
                 <!-- Добавление хэш-тегов и комментария к изображению -->
                 <fieldset class="img-upload__text text">
                   <div class="img-upload__field-wrapper">
-                    <input type="text" class="text__hashtags" name="hashtags" placeholder="#ХэшТег">
+                    <input type="text" class="text__hashtags" name="hashtags" placeholder="#ХэшТег" minlength="2">
                   </div>
                   <div class="img-upload__field-wrapper">
-                    <input type = "text" class="text__description" name="description" placeholder="Ваш комментарий..." required autocomplete="off"></input>
+                    <input type = "text" class="text__description" name="description" placeholder="Ваш комментарий..." required 
+                    autocomplete="off" minlength="20" maxlength="140"></input>
                   </div>
                 </fieldset>
 
