@@ -1,4 +1,4 @@
-import { getLastArrElem } from './utils.js';
+import { getLastArrElem } from '../utils.js';
 
 const effectsElems = document.querySelectorAll('.effects__preview');
 const imgPreview = document.querySelector('.img-upload__preview');

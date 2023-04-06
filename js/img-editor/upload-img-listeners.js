@@ -1,6 +1,6 @@
 /* eslint-disable no-alert */
 
-import { isEscKey } from './utils.js';
+import { isEscKey } from '../utils.js';
 import { addImgScaleListeners, removeImgScaleListeners } from './img-scale.js';
 import { addEffectsListeners, removeEffectsListeners } from './preview-effects.js';
 
