@@ -116,7 +116,7 @@
                 <!-- Добавление хэш-тегов и комментария к изображению -->
                 <fieldset class="img-upload__text text">
                   <div class="img-upload__field-wrapper">
-                    <input type="text" class="text__hashtags" name="hashtags" placeholder="#ХэшТег" minlength="2">
+                    <input type="text" class="text__hashtags" name="hashtags" placeholder="#ХэшТег" pattern="^#[a-zA-Zа-яА-ЯёЁ0-9]{1,17}$">
                   </div>
                   <div class="img-upload__field-wrapper">
                     <input type = "text" class="text__description" name="description" placeholder="Ваш комментарий..." required 
@@ -232,6 +232,7 @@
   <template id="messages">
     <div class="img-upload__message  img-upload__message--loading">Загружаем...</div>
   </template>
-<script type="module" src="./js/main.js"> </script>
+<script src="pristine/pristine.min.js"></script>
+<script type="module" src="js/main.js"> </script>
 </body>
 </html>
