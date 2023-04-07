@@ -53,10 +53,10 @@ function closeImgEditor() {
   removeEffectsListeners();
 }
 
-uploadFileInputElem.onchange = () => {
+uploadFileInputElem.addEventListener('change', () => {
   if (!imgRp.test(uploadFileInputElem.value)) {
     alert('Невозможно загрузить файл, т.к. это не картинка');
   } else {
     openImgEditor();
   }
-};
+});
