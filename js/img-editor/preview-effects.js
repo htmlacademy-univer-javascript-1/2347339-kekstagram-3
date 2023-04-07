@@ -1,30 +1,27 @@
 import { getLastArrElem } from '../utils.js';
 
-const effectsElems = document.querySelectorAll('.effects__preview');
-const imgPreview = document.querySelector('.img-upload__preview');
-//const DEFAULT_PREVIEW_EFFECT = 'effects__preview--none';
+const imgPreviewElem = document.querySelector('.img-upload__preview');
+const effectsListElem = document.querySelector('.effects__list');
+const DEFAULT_PREVIEW_EFFECT = 'effects__preview--none';
 
-//const effectsArray = Array.from(effectsElems);
-//const effectsListeners = Object.fromEntries(effectsArray)
-
-
-const onPreviewEffectClick = (elem) => () => {
-  const previewClassList = imgPreview.classList;
-  previewClassList.remove(getLastArrElem(previewClassList));
-  previewClassList.add(getLastArrElem(elem.classList));
+const onEffectItemClick = (evt) => {
+  const targetClasses = evt.target.classList;
+  const previewClasses = imgPreviewElem.classList;
+  if (targetClasses.contains('effects__preview')) {
+    previewClasses.remove(getLastArrElem(previewClasses));
+    previewClasses.add(getLastArrElem(targetClasses));
+  }
 };
 
 const addEffectsListeners = () => {
-  effectsElems.forEach((effectElem) => {
-    effectElem.addEventListener('click', onPreviewEffectClick(effectElem));
-  });
+  effectsListElem.addEventListener('click', onEffectItemClick);
 };
 
 const removeEffectsListeners = () => {
-  effectsElems.forEach((effectElem) => {
-    effectElem.removeEventListener('click', onPreviewEffectClick(effectElem));
-  });
-  // addEffect(DEFAULT_PREVIEW_EFFECT);
+  effectsListElem.removeEventListener('click', onEffectItemClick);
+  const previewClasses = imgPreviewElem.classList;
+  previewClasses.remove(getLastArrElem(previewClasses));
+  previewClasses.add(DEFAULT_PREVIEW_EFFECT);
 };
 
 export {addEffectsListeners, removeEffectsListeners};
