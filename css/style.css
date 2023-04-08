@@ -699,15 +699,13 @@ main {
 }
 
 .img-upload__form__error {
-  font-family: Georgia, serif;
-  font-size: 13px;
-  letter-spacing: 1.4px;
-  word-spacing: 1.8px;
-  color: #FFFFFF;
-  font-weight: 400;
-  text-decoration: none solid rgb(68, 68, 68);
+  font-family: "Arial", sans-serif;
+  font-size: 15px;
+  letter-spacing: 1.5px;
+  word-spacing: 1.2px;
+  color: #f30505cd;
+  font-weight: 700;
   font-style: normal;
-  font-variant: normal;
   text-transform: none;
 }
 
