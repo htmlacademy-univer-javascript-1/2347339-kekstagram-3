@@ -4,6 +4,7 @@ import './text-validators.js';
 import { isEscKey } from '../utils.js';
 import { addImgScaleListeners, removeImgScaleListeners, resetPreviewScale } from './img-scale.js';
 import { addEffectsListener, removeEffectsListener, resetPreviewEffects } from './preview-effects.js';
+import { resetTextValidators, clearTextInputs } from './text-validators.js';
 
 const IMG_EXTENSIONS = [
   'jpg',
@@ -45,7 +46,7 @@ function closeImgEditor() {
   imgEditorElem.classList.add('hidden');
   document.body.removeAttribute('class');
   uploadFileInputElem.removeAttribute('disabled');
-  uploadFileInputElem.value = '';
+  clearTextInputs(uploadFileInputElem);
   //imgElem.src = DEFAULT IMG
 
   document.removeEventListener('keydown', onEscKeydown);
@@ -54,6 +55,8 @@ function closeImgEditor() {
   resetPreviewScale();
   removeEffectsListener();
   resetPreviewEffects();
+  resetTextValidators();
+  clearTextInputs();
 }
 
 uploadFileInputElem.addEventListener('change', () => {
