@@ -2,8 +2,8 @@
 
 import './text-validators.js';  // HERE ??
 import { isEscKey } from '../utils.js';
-import { addImgScaleListeners, removeImgScaleListeners } from './img-scale.js';
-import { addEffectsListeners, removeEffectsListeners } from './preview-effects.js';
+import { addImgScaleListeners, removeImgScaleListeners, resetPreviewScale } from './img-scale.js';
+import { addEffectsListener, removeEffectsListener, resetPreviewEffects } from './preview-effects.js';
 
 const IMG_EXTENSIONS = [
   'jpg',
@@ -38,7 +38,7 @@ function openImgEditor() {
   imgEditorCloseElem.addEventListener('click', onImgEditorCrossClick);
   document.addEventListener('keydown', onEscKeydown);
   addImgScaleListeners();
-  addEffectsListeners();
+  addEffectsListener();
 }
 
 function closeImgEditor() {
@@ -51,7 +51,9 @@ function closeImgEditor() {
   document.removeEventListener('keydown', onEscKeydown);
   imgEditorCloseElem.removeEventListener('click', closeImgEditor);
   removeImgScaleListeners();
-  removeEffectsListeners();
+  resetPreviewScale();
+  removeEffectsListener();
+  resetPreviewEffects();
 }
 
 uploadFileInputElem.addEventListener('change', () => {
