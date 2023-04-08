@@ -1,5 +1,6 @@
 /* eslint-disable no-alert */
 
+import './text-validators.js';  // HERE ??
 import { isEscKey } from '../utils.js';
 import { addImgScaleListeners, removeImgScaleListeners } from './img-scale.js';
 import { addEffectsListeners, removeEffectsListeners } from './preview-effects.js';
