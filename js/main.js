@@ -1,8 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-console */
+import { generatePhotos } from './photos-loading.js';
+import './img-editor/upload-img-listeners.js';
+generatePhotos();
 
-import {getPhoto} from './data.js';
-import {createIdGenerator, getRandomIntFromRange} from './utils.js';
 
-const generatePhotoId = createIdGenerator(1);
-const photos = Array.from({length: 25}, () => getPhoto(generatePhotoId()));

@@ -512,6 +512,7 @@ main {
 
   width: 600px;
   height: 600px;
+  transform: scale(1);
 
   background-color: #ffffff;
 }
