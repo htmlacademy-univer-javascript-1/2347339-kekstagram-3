@@ -5,8 +5,9 @@ import { isEscKey, clearElemValue } from '../utils.js';
 import { addImgScaleListeners, removeImgScaleListeners, resetPreviewScale } from './img-scale.js';
 import { addEffectsListener, removeEffectsListener, resetPreviewEffects } from './preview-effects.js';
 import { resetTextValidators, clearTextInputs } from './text-validators.js';
+import { createEffectSlider, removeEffectSlider } from './effect-slider.js';
 
-const IMG_EXTENSIONS = [
+const IMG_EXTENSIONS = [  // rename files
   'jpg',
   'jpeg',
   'png',
@@ -53,11 +54,11 @@ function openImgEditor() {
   document.body.classList.add('modal-open');
   uploadFileInputElem.setAttribute('disabled', '');
 
-  //prewiewElem.src = uploadFileInputElem.value;
   addEditorCloseListeners();
   addImgScaleListeners();
   addEffectsListener();
-  //addImgLoadedListener();
+
+  createEffectSlider();
 }
 
 function closeImgEditor() {
@@ -70,6 +71,7 @@ function closeImgEditor() {
   removeEditorCloseListeners();
   removeImgScaleListeners();
   removeEffectsListener();
+  removeEffectSlider();
 
   clearElemValue(uploadFileInputElem);
   resetPreviewScale();
@@ -81,9 +83,10 @@ function closeImgEditor() {
 fReader.addEventListener('loadend', onImgInputLoaded);
 
 uploadFileInputElem.addEventListener('change', () => {
-  if (!imgRp.test(uploadFileInputElem.value)) {
-    alert('Невозможно загрузить файл, т.к. это не картинка');
-  } else {
+  const isImgFile = imgRp.test(uploadFileInputElem.value);
+  if (isImgFile) {
     fReader.readAsDataURL(uploadFileInputElem.files[0]);
+  } else {
+    alert('Невозможно загрузить файл, т.к. это не картинка');
   }
 });
