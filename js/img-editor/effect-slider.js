@@ -1,4 +1,4 @@
-import { imgPreviewElem } from './preview-effects.js';
+import { imgPreviewElem } from './img-editor.js';
 
 const SLIDER_EFECT_SETTINGS = {
   'chrome': {

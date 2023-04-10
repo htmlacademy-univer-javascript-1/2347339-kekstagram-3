@@ -26,7 +26,7 @@ const prewiewElem = imgEditorElem.querySelector('.img-upload__preview img');
 const imgPreviewElem = document.querySelector('.img-upload__preview');
 const fReader = new FileReader();
 
-const onEscKeydown = (evt) => {
+const onEscKeydown = (evt) => { // hastag validator doesn't work when submit with lefal comm
   if (isEscKey(evt)) {
     evt.preventDefault();
     closeImgEditor();
