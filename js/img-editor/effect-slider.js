@@ -1,3 +1,5 @@
+import { imgPreviewElem } from './preview-effects.js';
+
 const SLIDER_EFECT_SETTINGS = {
   'chrome': {
     min: 0,
@@ -35,29 +37,57 @@ const SLIDER_EFECT_SETTINGS = {
     filter: 'brightness'
   }};
 
+const DEFAULT_EFFECT_NAME = 'none';
 const effectValueELem = document.querySelector('.effect-level__value');
 const sliderElem = document.querySelector('.effect-level__slider');
 const effectValueFieldsetElem = document.querySelector('.img-upload__effect-level');
 
-const createEffectSlider = () => {
+const createEffectSlider = () => { // hastag validator doesn't work when comm is ok & submit
   noUiSlider.create(sliderElem, {
     range: {
       min: 0,
       max: 100,
     },
-    start: 80,
+    start: 100,
     step: 1,
-    connect: 'lower',
+    connect: 'lower'
   });
-  //effectValueFieldsetElem.setAttribute('hidden', '');
+  effectValueFieldsetElem.setAttribute('hidden', '');
+};
+
+const removeFilter = () => {
+  imgPreviewElem.style.removeProperty('filter');
 };
 
 const removeEffectSlider = () => {
   sliderElem.noUiSlider.destroy();
+  removeFilter();
 };
 
-const changeSliderOptions = () => {
+const changeSliderOptions = (effect) => {
+  if (effect === DEFAULT_EFFECT_NAME) {
+    effectValueFieldsetElem.setAttribute('hidden', '');
+    sliderElem.noUiSlider.off();
+    removeFilter();
+    return;
+  }
 
+  effectValueFieldsetElem.removeAttribute('hidden');
+  const settings = SLIDER_EFECT_SETTINGS[effect];
+  sliderElem.noUiSlider.updateOptions({
+    range: {
+      min: settings.min,
+      max: settings.max,
+    },
+    start: settings.max,
+    step: settings.step
+  });
+  sliderElem.noUiSlider.off();
+  sliderElem.noUiSlider.on('update', () => {
+    const effectValue = sliderElem.noUiSlider.get();
+    effectValueELem.value = effectValue;
+    imgPreviewElem.style.filter = `${settings.filter}(${effectValue + settings.size})`;
+  });
 };
 
 export {createEffectSlider, removeEffectSlider, changeSliderOptions};
