@@ -24,4 +24,8 @@ const getLastArrElem = (arr) => arr ? arr[arr.length - 1] : null;
 const isEscKey = (evt) => evt.key === 'Escape';
 const isEnterKey = (evt) => evt.key === 'Enter';
 
-export {getRandomIntFromRange, getRandomArrElem, hasLegalLength, createIdGenerator, isEscKey, isEnterKey, getLastArrElem};
+const clearElemValue = (elem) => {
+  elem.value = '';
+};
+
+export {getRandomIntFromRange, getRandomArrElem, hasLegalLength, createIdGenerator, isEscKey, isEnterKey, getLastArrElem, clearElemValue};

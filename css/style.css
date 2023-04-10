@@ -710,6 +710,17 @@ main {
   border-radius: 5px;
 }
 
+.img-upload__form__error {
+  font-family: "Arial", sans-serif;
+  font-size: 15px;
+  letter-spacing: 1.5px;
+  word-spacing: 1.2px;
+  color: #f30505cd;
+  font-weight: 700;
+  font-style: normal;
+  text-transform: none;
+}
+
 
 /**
  * Кнопка для отправки изображения
