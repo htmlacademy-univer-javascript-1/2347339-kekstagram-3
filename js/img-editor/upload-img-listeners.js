@@ -22,6 +22,7 @@ const uploadFileInputElem = document.querySelector('#upload-file');
 const imgEditorElem = document.querySelector('.img-upload__overlay');
 const imgEditorCloseElem = document.querySelector('#upload-cancel');
 const prewiewElem = imgEditorElem.querySelector('.img-upload__preview img');
+const fReader = new FileReader();
 
 const onEscKeydown = (evt) => {
   if (isEscKey(evt)) {
@@ -44,13 +45,7 @@ const removeEditorCloseListeners = () => {
 
 const onImgInputLoaded = (evt) => {
   prewiewElem.src = evt.target.result;
-  //uploadFileInputElem.value = evt.target.result;
-}; //remove
-
-const addImgLoadedListener = () => {
-  const fReader = new FileReader();// here?
-  fReader.readAsDataURL(uploadFileInputElem.files[0]); // here?
-  fReader.addEventListener('loadend', onImgInputLoaded);
+  openImgEditor();
 };
 
 function openImgEditor() {
@@ -59,8 +54,6 @@ function openImgEditor() {
   uploadFileInputElem.setAttribute('disabled', '');
 
   //prewiewElem.src = uploadFileInputElem.value;
-
-  addImgLoadedListener();
   addEditorCloseListeners();
   addImgScaleListeners();
   addEffectsListener();
@@ -85,11 +78,12 @@ function closeImgEditor() {
   clearTextInputs();
 }
 
+fReader.addEventListener('loadend', onImgInputLoaded);
 
 uploadFileInputElem.addEventListener('change', () => {
   if (!imgRp.test(uploadFileInputElem.value)) {
     alert('Невозможно загрузить файл, т.к. это не картинка');
   } else {
-    openImgEditor();
+    fReader.readAsDataURL(uploadFileInputElem.files[0]);
   }
 });
