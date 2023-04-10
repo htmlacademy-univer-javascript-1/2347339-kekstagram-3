@@ -7,7 +7,7 @@ import { addEffectsListener, removeEffectsListener, resetPreviewEffects } from '
 import { resetTextValidators, clearTextInputs } from './text-validators.js';
 import { createEffectSlider, removeEffectSlider } from './effect-slider.js';
 
-const IMG_EXTENSIONS = [  // rename files
+const IMG_EXTENSIONS = [
   'jpg',
   'jpeg',
   'png',
@@ -23,6 +23,7 @@ const uploadFileInputElem = document.querySelector('#upload-file');
 const imgEditorElem = document.querySelector('.img-upload__overlay');
 const imgEditorCloseElem = document.querySelector('#upload-cancel');
 const prewiewElem = imgEditorElem.querySelector('.img-upload__preview img');
+const imgPreviewElem = document.querySelector('.img-upload__preview');
 const fReader = new FileReader();
 
 const onEscKeydown = (evt) => {
@@ -90,3 +91,5 @@ uploadFileInputElem.addEventListener('change', () => {
     alert('Невозможно загрузить файл, т.к. это не картинка');
   }
 });
+
+export {imgPreviewElem};
