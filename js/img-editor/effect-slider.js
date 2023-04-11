@@ -6,7 +6,7 @@ const SLIDER_EFECT_SETTINGS = {
     max: 1,
     step: 0.1,
     size: '',
-    filter: 'graysacle'
+    filter: 'grayscale'
   },
   'sepia': {
     min: 0,
