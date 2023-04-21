@@ -17,8 +17,9 @@ const pristine = new Pristine(imgFormElem, {
 const isLegalHashtag = (str) => HASHTAG_REG.test(str);
 const isLegalDescription = (str) => !hasLegalLength(str, 19) && hasLegalLength(str, 140);
 
-pristine.addValidator(hashtagElem, isLegalHashtag);
-pristine.addValidator(descriptionElem, isLegalDescription);
+
+pristine.addValidator(descriptionElem, isLegalDescription, 'Длина комментария должна быть от 20 до 140 символов');
+pristine.addValidator(hashtagElem, isLegalHashtag, 'Хештег должен начинаться с # и иметь от 1 до 17 букв и(или) цифр после');
 
 const resetTextValidators = () => {
   pristine.reset();
@@ -30,16 +31,9 @@ const clearTextInputs = () => {
 };
 
 imgFormElem.addEventListener('submit', (evt) => {
-  const isValidForm = pristine.validate();
-  if (isValidForm) {
-    return;
-  }
   evt.preventDefault();
-  if (!isLegalDescription(descriptionElem.value)) {
-    pristine.addError(descriptionElem, 'Длина комментария должна быть от 20 до 140 символов');
-  } else if (!isLegalHashtag(hashtagElem.value)) {
-    pristine.addError(hashtagElem, 'Хештег должен начинаться с # и иметь от 1 до 17 букв и(или) цифр после');
-  }
+  new Promise((resolve) => resolve(pristine.validate()))
+    .then((isValidForm) => {});
 });
 
 export {resetTextValidators, clearTextInputs};
