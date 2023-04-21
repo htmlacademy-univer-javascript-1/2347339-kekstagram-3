@@ -42,7 +42,7 @@ const effectValueELem = document.querySelector('.effect-level__value');
 const sliderElem = document.querySelector('.effect-level__slider');
 const effectValueFieldsetElem = document.querySelector('.img-upload__effect-level');
 
-const createEffectSlider = () => { // hastag validator doesn't work when comm is ok & submit
+const createEffectSlider = () => {
   noUiSlider.create(sliderElem, {
     range: {
       min: 0,
