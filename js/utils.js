@@ -28,4 +28,15 @@ const clearElemValue = (elem) => {
   elem.value = '';
 };
 
-export {getRandomIntFromRange, getRandomArrElem, hasLegalLength, createIdGenerator, isEscKey, isEnterKey, getLastArrElem, clearElemValue};
+const createBtnBlocker = (btnElem, blockedBtnText, unblockedBtnText) => {
+  const blockBtn = (isBlocked, btnText) => function() {
+    btnElem.disabled = isBlocked;
+    btnElem.textContent = btnText;
+  };
+  return {
+    'block': blockBtn(true, blockedBtnText),
+    'unblock': blockBtn(false, unblockedBtnText)
+  };
+};
+
+export {getRandomIntFromRange, getRandomArrElem, hasLegalLength, createIdGenerator, isEscKey, isEnterKey, getLastArrElem, clearElemValue, createBtnBlocker};
