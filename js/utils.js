@@ -39,4 +39,11 @@ const createBtnBlocker = (btnElem, blockedBtnText, unblockedBtnText) => {
   };
 };
 
-export {getRandomIntFromRange, getRandomArrElem, hasLegalLength, createIdGenerator, isEscKey, isEnterKey, getLastArrElem, clearElemValue, createBtnBlocker};
+const showAlert = (message) => {
+  const alertElem = document.createElement('div');
+  alertElem.classList.add('load-data__err');
+  alertElem.textContent = message;
+  document.body.append(alertElem);
+};
+
+export {getRandomIntFromRange, getRandomArrElem, hasLegalLength, createIdGenerator, isEscKey, isEnterKey, getLastArrElem, clearElemValue, createBtnBlocker, showAlert};
