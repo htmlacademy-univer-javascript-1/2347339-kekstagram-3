@@ -28,4 +28,22 @@ const clearElemValue = (elem) => {
   elem.value = '';
 };
 
-export {getRandomIntFromRange, getRandomArrElem, hasLegalLength, createIdGenerator, isEscKey, isEnterKey, getLastArrElem, clearElemValue};
+const createBtnBlocker = (btnElem, blockedBtnText, unblockedBtnText) => {
+  const blockBtn = (isBlocked, btnText) => function() {
+    btnElem.disabled = isBlocked;
+    btnElem.textContent = btnText;
+  };
+  return {
+    'block': blockBtn(true, blockedBtnText),
+    'unblock': blockBtn(false, unblockedBtnText)
+  };
+};
+
+const showAlert = (message) => {
+  const alertElem = document.createElement('div');
+  alertElem.classList.add('load-data__err');
+  alertElem.textContent = message;
+  document.body.append(alertElem);
+};
+
+export {getRandomIntFromRange, getRandomArrElem, hasLegalLength, createIdGenerator, isEscKey, isEnterKey, getLastArrElem, clearElemValue, createBtnBlocker, showAlert};
