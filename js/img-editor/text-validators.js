@@ -1,11 +1,9 @@
-import { clearElemValue, hasLegalLength, createBtnBlocker } from '../utils.js';
-
+import { clearElemValue, hasLegalLength } from '../utils.js';
 
 const HASHTAG_REG = new RegExp('(^$)|(^#[a-zA-Zа-яА-ЯёЁ0-9]{1,17}$)');
 const imgFormElem = document.querySelector('.img-upload__form');
 const hashtagElem = document.querySelector('.text__hashtags');
 const descriptionElem = document.querySelector('.text__description');
-const submitBtnBlocker = createBtnBlocker(document.querySelector('.img-upload__submit'), 'Отправляю...', 'Отправить');
 const pristine = new Pristine(imgFormElem, {
   classTo: 'img-upload__text',
   errorClass: 'img-upload__form--invalid',
@@ -31,15 +29,4 @@ const clearTextInputs = () => {
   clearElemValue(descriptionElem);
 };
 
-imgFormElem.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-  new Promise((resolve) => resolve(pristine.validate()))
-    .then((isValidForm) => {
-      if (!isValidForm) {
-        throw 'Form is invalid!';
-      }
-      submitBtnBlocker.block();     // add catch
-    });
-});
-
-export {resetTextValidators, clearTextInputs};
+export {resetTextValidators, clearTextInputs, pristine};

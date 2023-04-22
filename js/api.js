@@ -15,4 +15,23 @@ const loadPhotos = (onSuccess, onFail) => {
     });
 };
 
-export{loadPhotos};
+const sendData = (onSuccess, onFail, body) => {
+  const URL = 'https://27.javascript.pages.academy/kekstagram-simple';
+  fetch(URL,
+    {
+      method: 'POST',
+      body: body
+    })
+    .then((response) => {
+      if (!response.ok) {
+        throw 'Невозможно отправить форму. Попробуйте еще раз.';
+      }
+      onSuccess();
+    })
+    .catch(() => {
+      onFail('Невозможно отправить форму. Попробуйте еще раз.');
+    });
+};
+
+
+export{loadPhotos, sendData};

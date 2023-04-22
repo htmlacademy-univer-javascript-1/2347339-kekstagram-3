@@ -6,6 +6,7 @@ import { addImgScaleListeners, removeImgScaleListeners, resetPreviewScale } from
 import { addEffectsListener, removeEffectsListener, resetPreviewEffects } from './preview-effects.js';
 import { resetTextValidators, clearTextInputs } from './text-validators.js';
 import { createEffectSlider, removeEffectSlider } from './effect-slider.js';
+import { addSubmitListener } from './img-form-submit.js';
 
 const IMG_EXTENSIONS = [
   'jpg',
@@ -60,6 +61,7 @@ function openImgEditor() {
   addEffectsListener();
 
   createEffectSlider();
+  addSubmitListener();
 }
 
 function closeImgEditor() {
