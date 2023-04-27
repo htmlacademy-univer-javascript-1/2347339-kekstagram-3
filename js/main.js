@@ -8,4 +8,3 @@ import { loadPhotos } from './api.js';
 import { showAlert } from './utils.js';
 
 loadPhotos(drawPhotos, showAlert);
-//https://learn.javascript.ru/position

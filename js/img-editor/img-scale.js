@@ -4,7 +4,6 @@ const MAX_SCALE = 100, MIN_SCALE = 25, SCALE_STEP = 25;
 const incrImgScaleElem = document.querySelector('.scale__control--bigger');
 const redImgScaleElem = document.querySelector('.scale__control--smaller');
 const imgScaleElem = document.querySelector('.scale__control--value');
-//const imgPreviewElem = document.querySelector('.img-upload__preview');
 
 const getScaleChanger = (op) => () => {
   let scaleValue = parseInt(imgScaleElem.value, 10);
