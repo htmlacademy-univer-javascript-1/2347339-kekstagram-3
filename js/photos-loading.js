@@ -1,3 +1,5 @@
+import { getToCloneElem } from './utils.js';
+
 const drawPhotos = (photos) => {
   const photosContainerElem = document.querySelector('.pictures');
   const photosFragmentElem = document.createDocumentFragment();
@@ -10,8 +12,8 @@ const drawPhotos = (photos) => {
 };
 
 function getPhotoELem(photo) {
-  const photoTemplateElem = document.querySelector('#picture').content.querySelector('.picture');
-  const photoElem = photoTemplateElem.cloneNode(true);
+  const toClonePhotoElem = getToCloneElem('#picture', '.picture');
+  const photoElem = toClonePhotoElem.cloneNode(true);
   photoElem.querySelector('.picture__img').src = photo.url;
   photoElem.querySelector('.picture__comments').textContent = photo.comments;
   photoElem.querySelector('.picture__likes').textContent = photo.likes;
