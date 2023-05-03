@@ -8,16 +8,17 @@ const clearElemValue = (elem) => {
   elem.value = '';
 };
 
-// const createBtnBlocker = (btnElem, blockedBtnText, unblockedBtnText) => {
-//   const blockBtn = (isBlocked, btnText) => function() {
-//     btnElem.disabled = isBlocked;
-//     btnElem.textContent = btnText;
-//   };
-//   return {
-//     'block': blockBtn(true, blockedBtnText),
-//     'unblock': blockBtn(false, unblockedBtnText)
-//   };
-// };
+const createBtnBlocker = (btnSelector, blockedBtnText, unblockedBtnText) => {
+  const btnElem = document.querySelector(btnSelector);
+  const blockBtn = (isBlocked, btnText) => function() {
+    btnElem.disabled = isBlocked;
+    btnElem.textContent = btnText;
+  };
+  return {
+    'block': blockBtn(true, blockedBtnText),
+    'unblock': blockBtn(false, unblockedBtnText)
+  };
+};
 
 const getOnAnotherAreaClickListener = (selector, cb) => {
   const onAnotherAreaClick = (evt) => {
@@ -55,4 +56,4 @@ const showAlert = (message) => {
 };
 
 export {hasLegalLength, isEscKey, isEnterKey, getLastArrElem,
-  clearElemValue, getOnAnotherAreaClickListener,  getOnEscKeydownListener, getToCloneElem ,showAlert};
+  clearElemValue, getOnAnotherAreaClickListener,  getOnEscKeydownListener, getToCloneElem ,showAlert, createBtnBlocker};
