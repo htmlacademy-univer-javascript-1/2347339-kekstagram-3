@@ -8,33 +8,37 @@ const clearElemValue = (elem) => {
   elem.value = '';
 };
 
-const createBtnBlocker = (btnElem, blockedBtnText, unblockedBtnText) => {
-  const blockBtn = (isBlocked, btnText) => function() {
-    btnElem.disabled = isBlocked;
-    btnElem.textContent = btnText;
-  };
-  return {
-    'block': blockBtn(true, blockedBtnText),
-    'unblock': blockBtn(false, unblockedBtnText)
-  };
-};
+// const createBtnBlocker = (btnElem, blockedBtnText, unblockedBtnText) => {
+//   const blockBtn = (isBlocked, btnText) => function() {
+//     btnElem.disabled = isBlocked;
+//     btnElem.textContent = btnText;
+//   };
+//   return {
+//     'block': blockBtn(true, blockedBtnText),
+//     'unblock': blockBtn(false, unblockedBtnText)
+//   };
+// };
 
 const getOnAnotherAreaClickListener = (selector, cb) => {
   const onAnotherAreaClick = (evt) => {
-    if (evt.target === document.querySelector(selector)) {
+    if (evt.target !== document.querySelector(selector)) {
       cb();
     }
   };
-
   return onAnotherAreaClick;
 };
 
-const getToCloneElem = (templateSelector, innerElemSelector) => 
-  document.querySelector(templateSelector).content.querySelector(innerElemSelector);
+const getOnEscKeydownListener = (cb) => {
+  const onEscKeydown = (evt) => {
+    if (isEscKey(evt)) {
+      cb();
+    }
+  }
+  return onEscKeydown;
+};
 
-// const getToCloneElem = (templateSelector, innerElemSelector) => {
-//   return document.querySelector(templateSelector).content.querySelector(innerElemSelector);
-// }; // set in other modules
+const getToCloneElem = (templateSelector, innerElemSelector) =>                        // set to other modules
+  document.querySelector(templateSelector).content.querySelector(innerElemSelector);
 
 const showAlert = (message) => {
   const ERR_MSG_DURATION = 5000;  // ms
@@ -49,6 +53,6 @@ const showAlert = (message) => {
     alertElem.remove();
   }, ERR_MSG_DURATION);
 };
-// add:  createListener() ...
+
 export {hasLegalLength, isEscKey, isEnterKey, getLastArrElem,
-  clearElemValue, createBtnBlocker, getOnAnotherAreaClickListener, getToCloneElem ,showAlert};
+  clearElemValue, getOnAnotherAreaClickListener,  getOnEscKeydownListener, getToCloneElem ,showAlert};
