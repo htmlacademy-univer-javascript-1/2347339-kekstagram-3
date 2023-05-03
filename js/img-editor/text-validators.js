@@ -29,4 +29,15 @@ const clearTextInputs = () => {
   clearElemValue(descriptionElem);
 };
 
-export {resetTextValidators, clearTextInputs, pristine};
+const getHashtagInput = () => hashtagElem.value;
+const getDescriptionInput = () => descriptionElem.value;
+
+const setHashtagInput = (text) => {
+  hashtagElem.value = text;
+};
+
+const setDescriptionInput = (text) => {
+  descriptionElem.value = text;
+};
+
+export {resetTextValidators, clearTextInputs, getHashtagInput, getDescriptionInput, setHashtagInput, setDescriptionInput, pristine};
