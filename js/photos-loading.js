@@ -12,8 +12,7 @@ const drawPhotos = (photos) => {
 };
 
 function getPhotoELem(photo) {
-  const toClonePhotoElem = getToCloneElem('#picture', '.picture');
-  const photoElem = toClonePhotoElem.cloneNode(true);
+  const photoElem = getToCloneElem('#picture', '.picture').cloneNode(true);
   photoElem.querySelector('.picture__img').src = photo.url;
   photoElem.querySelector('.picture__comments').textContent = photo.comments;
   photoElem.querySelector('.picture__likes').textContent = photo.likes;
