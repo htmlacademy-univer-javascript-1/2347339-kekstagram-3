@@ -1,5 +1,5 @@
 const loadPhotos = (onSuccess, onFail) => {
-  const URL = 'https://27.javascript.pages.academy/kekstagram-simple/dat';
+  const URL = 'https://27.javascript.pages.academy/kekstagram-simple/data';
   fetch(URL)
     .then((response) => {
       if (response.ok) {
@@ -26,7 +26,6 @@ const sendData = (onSuccess, onFail, body) => {
       if (!response.ok) {
         throw 'Невозможно отправить форму. Попробуйте еще раз.';
       }
-      alert('Sending data...');
       onSuccess();
     })
     .catch(() => {
