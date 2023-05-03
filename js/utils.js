@@ -34,11 +34,11 @@ const getOnEscKeydownListener = (cb) => {
     if (isEscKey(evt)) {
       cb();
     }
-  }
+  };
   return onEscKeydown;
 };
 
-const getToCloneElem = (templateSelector, innerElemSelector) =>                        // set to other modules
+const getToCloneElem = (templateSelector, innerElemSelector) =>
   document.querySelector(templateSelector).content.querySelector(innerElemSelector);
 
 const showAlert = (message) => {
@@ -48,7 +48,7 @@ const showAlert = (message) => {
 
   alertElem.classList.add(ALERT_CLASS);
   alertElem.textContent = message;
-  document.body.append(alertElem);
+  document.body.insertBefore(alertElem, document.body.firstChild);
 
   setTimeout(() => {
     alertElem.remove();

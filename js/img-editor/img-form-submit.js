@@ -9,7 +9,7 @@ const imgFormElem = document.querySelector('.img-upload__form');
 
 let imgFile;
 
-const onSubmitBtnClick = (evt) => {
+function onSubmitBtnClick(evt) {
   evt.preventDefault();
   new Promise((resolve) => resolve(pristine.validate()))
     .then((isValidForm) => {
@@ -19,30 +19,37 @@ const onSubmitBtnClick = (evt) => {
       submitBtnBlocker.block();
       const body = new FormData(imgFormElem);
       body.append('filename', imgFile);
-      sendData(showSuccess, showError, body);
-    })
-    .then(() => {
+      sendData(showSuccess, showError, body);    // add block user u
+      document.addEventListener('click', onSendingData, true);
     });
-};
+}
 
 function showSuccess() {
-  submitBtnBlocker.unblock();
+  defaultActions();
   const successMsgElem = createMsgElem('#success', '.success', document.body, '.success__button', '.success__inner');
-  closeImgEditor();
   successMsgElem.show();
 }
 
 function showError() {
-  submitBtnBlocker.unblock();
-  const errorMsgElem = createMsgElem('#error', '.error', document.body, '.error__button', '.error__inner');
   const hashtag = getHashtagInput();
   const description = getDescriptionInput();
-  closeImgEditor();
-  errorMsgElem.show();
+  defaultActions();
   setHashtagInput(hashtag);
   setDescriptionInput(description);       //effects, slider?
+  const errorMsgElem = createMsgElem('#error', '.error', document.body, '.error__button', '.error__inner');
+  errorMsgElem.show();
 }
 
+function defaultActions() {
+  submitBtnBlocker.unblock();
+  closeImgEditor();
+  document.removeEventListener('click', onSendingData, true);
+}
+
+function onSendingData(evt) {
+  evt.preventDefault();
+  evt.stopPropagation();
+}
 
 const addSubmitListener = () => {
   imgFormElem.addEventListener('submit', onSubmitBtnClick);

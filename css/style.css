@@ -1209,7 +1209,7 @@ main {
 
  .load-data__err {
   z-index: 100;
-  position: absolute;
+  position: relative;
   left: 0;
   right: 0;
   top: 0;

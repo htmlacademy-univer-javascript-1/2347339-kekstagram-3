@@ -1,5 +1,5 @@
 import './text-validators.js';
-import { isEscKey, clearElemValue } from '../utils.js';
+import { isEscKey, clearElemValue, showAlert } from '../utils.js';
 import { addImgScaleListeners, removeImgScaleListeners, resetPreviewScale } from './img-scale.js';
 import { addEffectsListener, removeEffectsListener, resetPreviewEffects } from './preview-effects.js';
 import { resetTextValidators, clearTextInputs } from './text-validators.js';
@@ -91,7 +91,7 @@ uploadFileInputElem.addEventListener('change', () => {
     fReader.readAsDataURL(file);
     setFileNameInForm(file);
   } else {
-    alert('Невозможно загрузить файл, т.к. это не картинка'); // show alert
+    showAlert('Невозможно загрузить файл, т.к. это не картинка');
   }
 });
 

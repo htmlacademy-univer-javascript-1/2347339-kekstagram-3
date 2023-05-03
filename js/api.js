@@ -1,5 +1,5 @@
 const loadPhotos = (onSuccess, onFail) => {
-  const URL = 'https://27.javascript.pages.academy/kekstagram-simple/data';
+  const URL = 'https://27.javascript.pages.academy/kekstagram-simple/ata';
   fetch(URL)
     .then((response) => {
       if (response.ok) {
@@ -16,7 +16,7 @@ const loadPhotos = (onSuccess, onFail) => {
 };
 
 const sendData = (onSuccess, onFail, body) => {
-  const URL = 'https://27.javascript.pages.academy/kekstagram-simple';
+  const URL = 'https://27.javascript.pages.academy/kekstgram-simple';
   fetch(URL,
     {
       method: 'POST',
@@ -24,12 +24,12 @@ const sendData = (onSuccess, onFail, body) => {
     })
     .then((response) => {
       if (!response.ok) {
-        throw 'Невозможно отправить форму. Попробуйте еще раз.';
+        throw '';
       }
       onSuccess();
     })
     .catch(() => {
-      onFail('Невозможно отправить форму. Попробуйте еще раз.');
+      onFail();
     });
 };
 
