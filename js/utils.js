@@ -1,24 +1,4 @@
-const getRandomIntFromRange = (fromNum, toNum) => {
-  if (typeof fromNum !== 'number' || typeof toNum !== 'number') {
-    throw 'Переданы значения, не являющиеся числами!';
-  }
-  if (fromNum > toNum) {
-    throw 'Началое значение интервала больше конечного!';
-  }
-  fromNum = Math.ceil(fromNum);
-  toNum = Math.floor(toNum);
-  return Math.floor(Math.random() * (toNum + 1 - fromNum) + fromNum);
-};
-
-const getRandomArrElem = (arr) => arr[getRandomIntFromRange(0, arr.length - 1)];
-
 const hasLegalLength = (string, maxLegalLength) => string.length < maxLegalLength + 1;
-
-const createIdGenerator = (stardId = 0) => {
-  let curId = stardId;
-  return () => curId++;
-};
-
 const getLastArrElem = (arr) => arr ? arr[arr.length - 1] : null;
 
 const isEscKey = (evt) => evt.key === 'Escape';
@@ -28,4 +8,52 @@ const clearElemValue = (elem) => {
   elem.value = '';
 };
 
-export {getRandomIntFromRange, getRandomArrElem, hasLegalLength, createIdGenerator, isEscKey, isEnterKey, getLastArrElem, clearElemValue};
+const createBtnBlocker = (btnSelector, blockedBtnText, unblockedBtnText) => {
+  const btnElem = document.querySelector(btnSelector);
+  const blockBtn = (isBlocked, btnText) => function() {
+    btnElem.disabled = isBlocked;
+    btnElem.textContent = btnText;
+  };
+  return {
+    'block': blockBtn(true, blockedBtnText),
+    'unblock': blockBtn(false, unblockedBtnText)
+  };
+};
+
+const getOnAnotherAreaClickListener = (selector, cb) => {
+  const onAnotherAreaClick = (evt) => {
+    if (evt.target !== document.querySelector(selector)) {
+      cb();
+    }
+  };
+  return onAnotherAreaClick;
+};
+
+const getOnEscKeydownListener = (cb) => {
+  const onEscKeydown = (evt) => {
+    if (isEscKey(evt)) {
+      cb();
+    }
+  };
+  return onEscKeydown;
+};
+
+const getToCloneElem = (templateSelector, innerElemSelector) =>
+  document.querySelector(templateSelector).content.querySelector(innerElemSelector);
+
+const showAlert = (message) => {
+  const ERR_MSG_DURATION = 5000;  // ms
+  const ALERT_CLASS = 'load-data__err';
+  const alertElem = document.createElement('div');
+
+  alertElem.classList.add(ALERT_CLASS);
+  alertElem.textContent = message;
+  document.body.insertBefore(alertElem, document.body.firstChild);
+
+  setTimeout(() => {
+    alertElem.remove();
+  }, ERR_MSG_DURATION);
+};
+
+export {hasLegalLength, isEscKey, isEnterKey, getLastArrElem,
+  clearElemValue, getOnAnotherAreaClickListener,  getOnEscKeydownListener, getToCloneElem ,showAlert, createBtnBlocker};

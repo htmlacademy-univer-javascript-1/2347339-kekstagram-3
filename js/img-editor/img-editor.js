@@ -1,11 +1,10 @@
-/* eslint-disable no-alert */
-
 import './text-validators.js';
-import { isEscKey, clearElemValue } from '../utils.js';
+import { clearElemValue, showAlert, getOnEscKeydownListener } from '../utils.js';
 import { addImgScaleListeners, removeImgScaleListeners, resetPreviewScale } from './img-scale.js';
 import { addEffectsListener, removeEffectsListener, resetPreviewEffects } from './preview-effects.js';
 import { resetTextValidators, clearTextInputs } from './text-validators.js';
 import { createEffectSlider, removeEffectSlider } from './effect-slider.js';
+import { addSubmitListener, removeSubmitListener, setFileNameInForm } from './img-form-submit.js';
 
 const IMG_EXTENSIONS = [
   'jpg',
@@ -17,7 +16,6 @@ const IMG_EXTENSIONS = [
   'webp',
   'ico',
 ];
-const DEFAULT_PIC_PATH = 'img/upload-default-image.jpg';
 const imgRp = new RegExp(`\\.(${IMG_EXTENSIONS.join('|')})*$`);
 const uploadFileInputElem = document.querySelector('#upload-file');
 const imgEditorElem = document.querySelector('.img-upload__overlay');
@@ -26,13 +24,7 @@ const prewiewElem = imgEditorElem.querySelector('.img-upload__preview img');
 const imgPreviewElem = document.querySelector('.img-upload__preview');
 const fReader = new FileReader();
 
-const onEscKeydown = (evt) => { // hastag validator doesn't work when submit with lefal comm
-  if (isEscKey(evt)) {
-    evt.preventDefault();
-    closeImgEditor();
-  }
-};
-
+const onEscKeydown = getOnEscKeydownListener(closeImgEditor);
 const onImgEditorCrossClick = closeImgEditor;
 
 const addEditorCloseListeners = () => {
@@ -60,6 +52,7 @@ function openImgEditor() {
   addEffectsListener();
 
   createEffectSlider();
+  addSubmitListener();
 }
 
 function closeImgEditor() {
@@ -67,12 +60,13 @@ function closeImgEditor() {
   document.body.removeAttribute('class');
   uploadFileInputElem.removeAttribute('disabled');
 
-  prewiewElem.src = DEFAULT_PIC_PATH;
+  prewiewElem.src = '';
 
   removeEditorCloseListeners();
   removeImgScaleListeners();
   removeEffectsListener();
   removeEffectSlider();
+  removeSubmitListener();
 
   clearElemValue(uploadFileInputElem);
   resetPreviewScale();
@@ -86,10 +80,12 @@ fReader.addEventListener('loadend', onImgInputLoaded);
 uploadFileInputElem.addEventListener('change', () => {
   const isImgFile = imgRp.test(uploadFileInputElem.value);
   if (isImgFile) {
-    fReader.readAsDataURL(uploadFileInputElem.files[0]);
+    const file = uploadFileInputElem.files[0];
+    fReader.readAsDataURL(file);
+    setFileNameInForm(file);
   } else {
-    alert('Невозможно загрузить файл, т.к. это не картинка');
+    showAlert('Невозможно загрузить файл, т.к. это не картинка');
   }
 });
 
-export {imgPreviewElem};
+export {imgPreviewElem, closeImgEditor};

@@ -1203,9 +1203,30 @@ main {
   transform: translateX(-50%);
 }
 
+/**
+ * Экран ошибки при загрузки изображений с сервера
+ */
+
+ .load-data__err {
+  z-index: 100;
+  position: relative;
+  left: 0;
+  right: 0;
+  top: 0;
+  padding: 15px;
+  font-size: 20px;
+  text-align: center;
+
+  font-family: "Arial", sans-serif;
+  letter-spacing: 1.5px;
+  word-spacing: 1.2px;
+  color: #e92727cd;
+  font-weight: 700;
+ }
+
 
 /**
- * Экраны ошибки и успеха загрузки изображения
+ * Экраны ошибки и успеха загрузки изображения при отправке на сервер
  */
 
 .error,

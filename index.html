@@ -31,7 +31,7 @@
       <section class="img-upload">
         <div class="img-upload__wrapper">
           <h2 class="img-upload__title  visually-hidden">Загрузка фотографии</h2>
-          <form class="img-upload__form" id="upload-select-image" method="post" enctype="multipart/form-data" autocomplete="off" action=" https://27.javascript.pages.academy/kekstagram-simple">
+          <form class="img-upload__form" id="upload-select-image" method="post" enctype="multipart/form-data" autocomplete="off" action=" https://27.javascript.pages.academy/kekstagram-simple" novalidate>
 
             <!-- Изначальное состояние поля для загрузки изображения -->
             <fieldset class="img-upload__start">
@@ -117,16 +117,10 @@
                 <!-- Добавление хэш-тегов и комментария к изображению -->
                 <fieldset class="img-upload__text text">
                   <div class="img-upload__field-wrapper">
-                    <input type="text" class="text__hashtags" name="hashtags" placeholder="#ХэшТег" pattern="/^#[a-zA-Zа-яА-ЯёЁ0-9]{1,17}$/"
-                    data-pristine-pattern-message="Хештег должен начинаться решеткой и иметь от 1 до 17 букв или цифр после!"
-                    >
+                    <input type="text" class="text__hashtags" name="hashtags" placeholder="#ХэшТег">
                   </div>
                   <div class="img-upload__field-wrapper">
-                    <input type = "text" class="text__description" name="description" placeholder="Ваш комментарий..." required 
-                    autocomplete="off" minlength="20" maxlength="140" 
-                    data-pristine-required-message="Введите комментарий!" 
-                    data-pristine-minlength-message="Длина комментария должна быть от 20 до 140 символов!"              
-                    ></input>
+                    <input type = "text" class="text__description" name="description" placeholder="Ваш комментарий..." autocomplete="off"></input>
                   </div>
                 </fieldset>
 

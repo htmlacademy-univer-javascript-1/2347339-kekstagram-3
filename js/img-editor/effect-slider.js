@@ -6,7 +6,7 @@ const SLIDER_EFECT_SETTINGS = {
     max: 1,
     step: 0.1,
     size: '',
-    filter: 'graysacle'
+    filter: 'grayscale'
   },
   'sepia': {
     min: 0,
@@ -42,7 +42,7 @@ const effectValueELem = document.querySelector('.effect-level__value');
 const sliderElem = document.querySelector('.effect-level__slider');
 const effectValueFieldsetElem = document.querySelector('.img-upload__effect-level');
 
-const createEffectSlider = () => { // hastag validator doesn't work when comm is ok & submit
+const createEffectSlider = () => {
   noUiSlider.create(sliderElem, {
     range: {
       min: 0,
@@ -64,16 +64,7 @@ const removeEffectSlider = () => {
   removeFilter();
 };
 
-const changeSliderOptions = (effect) => {
-  if (effect === DEFAULT_EFFECT_NAME) {
-    effectValueFieldsetElem.setAttribute('hidden', '');
-    sliderElem.noUiSlider.off();
-    removeFilter();
-    return;
-  }
-
-  effectValueFieldsetElem.removeAttribute('hidden');
-  const settings = SLIDER_EFECT_SETTINGS[effect];
+const setNewSliderOptions = (settings) => {
   sliderElem.noUiSlider.updateOptions({
     range: {
       min: settings.min,
@@ -88,6 +79,18 @@ const changeSliderOptions = (effect) => {
     effectValueELem.value = effectValue;
     imgPreviewElem.style.filter = `${settings.filter}(${effectValue + settings.size})`;
   });
+};
+
+const changeSliderOptions = (effect) => {
+  if (effect === DEFAULT_EFFECT_NAME) {
+    effectValueFieldsetElem.setAttribute('hidden', '');
+    sliderElem.noUiSlider.off();
+    removeFilter();
+    return;
+  }
+  effectValueFieldsetElem.removeAttribute('hidden');
+  const settings = SLIDER_EFECT_SETTINGS[effect];
+  setNewSliderOptions(settings);
 };
 
 export {createEffectSlider, removeEffectSlider, changeSliderOptions};
