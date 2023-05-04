@@ -1,5 +1,5 @@
 import './text-validators.js';
-import { isEscKey, clearElemValue, showAlert } from '../utils.js';
+import { clearElemValue, showAlert, getOnEscKeydownListener } from '../utils.js';
 import { addImgScaleListeners, removeImgScaleListeners, resetPreviewScale } from './img-scale.js';
 import { addEffectsListener, removeEffectsListener, resetPreviewEffects } from './preview-effects.js';
 import { resetTextValidators, clearTextInputs } from './text-validators.js';
@@ -16,7 +16,6 @@ const IMG_EXTENSIONS = [
   'webp',
   'ico',
 ];
-const DEFAULT_PIC_PATH = 'img/upload-default-image.jpg';
 const imgRp = new RegExp(`\\.(${IMG_EXTENSIONS.join('|')})*$`);
 const uploadFileInputElem = document.querySelector('#upload-file');
 const imgEditorElem = document.querySelector('.img-upload__overlay');
@@ -25,13 +24,7 @@ const prewiewElem = imgEditorElem.querySelector('.img-upload__preview img');
 const imgPreviewElem = document.querySelector('.img-upload__preview');
 const fReader = new FileReader();
 
-const onEscKeydown = (evt) => {
-  if (isEscKey(evt)) {
-    evt.preventDefault();
-    closeImgEditor();
-  }
-};
-
+const onEscKeydown = getOnEscKeydownListener(closeImgEditor);
 const onImgEditorCrossClick = closeImgEditor;
 
 const addEditorCloseListeners = () => {
@@ -67,7 +60,7 @@ function closeImgEditor() {
   document.body.removeAttribute('class');
   uploadFileInputElem.removeAttribute('disabled');
 
-  prewiewElem.src = DEFAULT_PIC_PATH;
+  prewiewElem.src = '';
 
   removeEditorCloseListeners();
   removeImgScaleListeners();

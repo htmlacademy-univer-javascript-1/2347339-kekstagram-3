@@ -25,25 +25,23 @@ function onSubmitBtnClick(evt) {
 }
 
 function showSuccess() {
-  defaultActions();
   const successMsgElem = createMsgElem('#success', '.success', document.body, '.success__button', '.success__inner');
   successMsgElem.show();
+  submitBtnBlocker.unblock();
+  closeImgEditor();
+  document.removeEventListener('click', onSendingData, true);
 }
 
 function showError() {
   const hashtag = getHashtagInput();
   const description = getDescriptionInput();
-  defaultActions();
-  setHashtagInput(hashtag);
-  setDescriptionInput(description);       //effects, slider?
   const errorMsgElem = createMsgElem('#error', '.error', document.body, '.error__button', '.error__inner');
   errorMsgElem.show();
-}
-
-function defaultActions() {
   submitBtnBlocker.unblock();
   closeImgEditor();
   document.removeEventListener('click', onSendingData, true);
+  setHashtagInput(hashtag);
+  setDescriptionInput(description);
 }
 
 function onSendingData(evt) {

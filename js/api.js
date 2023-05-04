@@ -1,5 +1,5 @@
 const loadPhotos = (onSuccess, onFail) => {
-  const URL = 'https://27.javascript.pages.academy/kekstagram-simple/ata';
+  const URL = 'https://27.javascript.pages.academy/kekstagram-simple/data';
   fetch(URL)
     .then((response) => {
       if (response.ok) {
@@ -16,7 +16,7 @@ const loadPhotos = (onSuccess, onFail) => {
 };
 
 const sendData = (onSuccess, onFail, body) => {
-  const URL = 'https://27.javascript.pages.academy/kekstgram-simple';
+  const URL = 'https://27.javascript.pages.academy/kekstagram-simple';
   fetch(URL,
     {
       method: 'POST',
